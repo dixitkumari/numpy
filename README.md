@@ -61,3 +61,34 @@ array([66, 92, 98, 17, 83, 57, 86, 97, 96, 47])
 np.random.seed(101)
 np.random.randint(0,100,10)
 array([95, 11, 81, 70, 63, 87, 75,  9, 77, 40])
+
+# Generate array of Random float numbers
+f1 = np.random.uniform(5,10, size=(10))
+f1
+array([6.5348311 , 9.4680654 , 8.60771931, 5.94969477, 7.77113796,
+       6.76065977, 5.90946201, 8.92800881, 9.82741611, 6.16176831])
+# Extract Integer part
+np.floor(f1)
+array([6., 9., 8., 5., 7., 6., 5., 8., 9., 6.])
+# Truncate decimal part
+np.trunc(f1)
+array([6., 9., 8., 5., 7., 6., 5., 8., 9., 6.])
+# Convert Float Array to Integer array
+f1.astype(int)
+array([6, 9, 8, 5, 7, 6, 5, 8, 9, 6])
+# Normal distribution (mean=0 and variance=1)
+b2 =np.random.randn(10)
+b2
+array([ 0.18869531, -0.75887206, -0.93323722,  0.95505651,  0.19079432,
+        1.97875732,  2.60596728,  0.68350889,  0.30266545,  1.69372293])
+arr1
+array([10, 20, 30, 40, 50, 60])
+# Enumerate for Numpy Arrays
+for index, value in np.ndenumerate(arr1):
+    print(index, value)
+(0,) 10
+(1,) 20
+(2,) 30
+(3,) 40
+(4,) 50
+(5,) 60
