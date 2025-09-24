@@ -311,3 +311,245 @@ array([[1],
        [4],
        [5],
        [6]])
+
+
+
+**Stack Arrays Horizontally**
+np.hstack([a,b])
+array([[0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 1., 1., 1., 1., 1., 1.,
+        1., 1., 1., 1.],
+       [0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 1., 1., 1., 1., 1., 1.,
+        1., 1., 1., 1.]])
+np.hstack([a1,b1])
+array([[1, 4],
+       [2, 5],
+       [3, 6]])
+### hstack & vstack
+
+arr1 = np.array([[7,13,14],[18,10,17],[11,12,19]])
+arr2= np.array([16,6,1])
+arr3= np.array([[5,8,4,3]])
+
+np.hstack((np.vstack((arr1,arr2)),np.transpose(arr3)))
+array([[ 7, 13, 14,  5],
+       [18, 10, 17,  8],
+       [11, 12, 19,  4],
+       [16,  6,  1,  3]])
+
+
+**Common items between two Arrays**
+c1 = np.array([10,20,30,40,50,60])
+c2 = np.array([12,20,33,40,55,60])
+np.intersect1d(c1,c2)
+array([20, 40, 60])
+
+
+**Remove Common Elements**
+# Remove common elements of C1 & C2 array from C1
+
+np.setdiff1d(c1,c2)
+array([10, 30, 50])
+
+
+**Process Elements on Conditions**
+a = np.array([1,2,3,6,8])
+b = np.array([10,2,30,60,8])
+
+np.where(a == b) # returns the indices of elements in an input array where the given condition is satisfied.
+(array([1, 4], dtype=int64),)
+# Return an array where condition is satisfied
+a[np.where(a == b)]
+array([2, 8])
+# Return all numbers betweeen 20 & 35
+a1 = np.arange(0,60)
+a1[np.where ((a1>20) & (a1<35))]
+array([21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34])
+# Return all numbers betweeen 20 & 35 OR numbers divisible by 10
+a1 = np.arange(0,60)
+a1[np.where (((a1>20) & (a1<35)) | (a1 % 10 ==0)) ]
+array([ 0, 10, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34,
+       40, 50])
+# Return all numbers betweeen 20 & 35 using np.logical_and
+a1[np.where(np.logical_and(a1>20, a1<35))]
+array([21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34])
+
+
+
+**Check for elements in an Array using isin()**
+a = np.array([10,20,30,40,50,60,70])
+a
+array([10, 20, 30, 40, 50, 60, 70])
+# Check whether number 11 & 20 are present in an array
+np.isin(a, [11,20])
+array([False,  True, False, False, False, False, False])
+#Display the matching numbers
+a[np.isin(a,20)]
+array([20])
+# Check whether number 33 is present in an array
+np.isin(a, 33)
+array([False, False, False, False, False, False, False])
+a[np.isin(a, 33)]
+array([], dtype=int32)
+b = np.array([10,20,30,40,10,10,70,80,70,90])
+b
+array([10, 20, 30, 40, 10, 10, 70, 80, 70, 90])
+# Check whether number 10 & 70 are present in an array
+np.isin(b, [10,70])
+array([ True, False, False, False,  True,  True,  True, False,  True,
+       False])
+# Display the indices where match occurred
+np.where(np.isin(b, [10,70]))
+(array([0, 4, 5, 6, 8], dtype=int64),)
+# Display the matching values
+b[np.where(np.isin(b, [10,70]))]
+array([10, 10, 10, 70, 70])
+# Display the matching values
+b[np.isin(b, [10,70])]
+array([10, 10, 10, 70, 70])
+
+
+**Reverse Array**
+a4 = np.arange(10,30)
+a4
+array([10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26,
+       27, 28, 29])
+# Reverse the array
+a4[::-1]
+array([29, 28, 27, 26, 25, 24, 23, 22, 21, 20, 19, 18, 17, 16, 15, 14, 13,
+       12, 11, 10])
+# Reverse the array
+np.flip(a4)
+array([29, 28, 27, 26, 25, 24, 23, 22, 21, 20, 19, 18, 17, 16, 15, 14, 13,
+       12, 11, 10])
+a3 = np.array([[3,2,8,1] , [70,50,10,67] , [45,25,75,15] , [12,9,77,4]])
+a3
+array([[ 3,  2,  8,  1],
+       [70, 50, 10, 67],
+       [45, 25, 75, 15],
+       [12,  9, 77,  4]])
+# Reverse ROW positions
+a3[::-1,]
+array([[12,  9, 77,  4],
+       [45, 25, 75, 15],
+       [70, 50, 10, 67],
+       [ 3,  2,  8,  1]])
+# Reverse COLUMN positions
+a3[:,::-1]
+array([[ 1,  8,  2,  3],
+       [67, 10, 50, 70],
+       [15, 75, 25, 45],
+       [ 4, 77,  9, 12]])
+# Reverse both ROW & COLUMN positions
+a3[::-1,::-1]
+array([[ 4, 77,  9, 12],
+       [15, 75, 25, 45],
+       [67, 10, 50, 70],
+       [ 1,  8,  2,  3]])
+
+
+**Sorting Array**
+a = np.array([10,5,2,22,12,92,17,33])
+# Sort array in ascending order
+np.sort(a)
+array([ 2,  5, 10, 12, 17, 22, 33, 92])
+a3 = np.array([[3,2,8,1] , [70,50,10,67] , [45,25,75,15]])
+a3
+array([[ 3,  2,  8,  1],
+       [70, 50, 10, 67],
+       [45, 25, 75, 15]])
+# Sort along rows
+np.sort(a3)
+array([[ 1,  2,  3,  8],
+       [10, 50, 67, 70],
+       [15, 25, 45, 75]])
+# Sort along rows
+np.sort(a3,axis =1)
+array([[ 1,  2,  3,  8],
+       [10, 50, 67, 70],
+       [15, 25, 45, 75]])
+# Sort along columns
+np.sort(a3,axis =0)
+array([[ 3,  2,  8,  1],
+       [45, 25, 10, 15],
+       [70, 50, 75, 67]])
+# Sort in descending order
+b = np.sort(a)
+b = b[::-1]
+b
+array([92, 33, 22, 17, 12, 10,  5,  2])
+# Sort in descending order
+c = np.sort(a)
+np.flip(c)
+array([92, 33, 22, 17, 12, 10,  5,  2])
+# Sort in descending order
+a[::-1].sort()
+a
+array([92, 33, 22, 17, 12, 10,  5,  2])
+
+
+**"N" Largest & Smallest Numbers in an Array**
+p = np.arange(0,50)
+p
+array([ 0,  1,  2,  3,  4,  5,  6,  7,  8,  9, 10, 11, 12, 13, 14, 15, 16,
+       17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33,
+       34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49])
+np.random.shuffle(p)
+p
+array([33, 48, 14, 20, 44, 29,  4, 46, 18, 45, 21,  2,  7, 30, 17, 40, 37,
+       42, 34, 25, 35, 38, 43,  8, 24, 32, 10, 36,  0, 26, 12,  9,  3, 39,
+        6, 49, 23, 13,  1,  5, 19, 27, 47, 15, 22, 11, 41, 31, 16, 28])
+# Return "n" largest numbers in an Array
+n = 4
+p[np.argsort(p)[-nth:]]
+array([46, 47, 48, 49])
+# Return "n" largest numbers in an Array
+p[np.argpartition(-p,n)[:n]]
+array([48, 47, 49, 46])
+# Return "n" smallest numbers in an Array
+p[np.argsort(-p)[-n:]]
+array([3, 2, 1, 0])
+# Return "n" smallest numbers in an Array
+p[np.argpartition(p,n)[:n]]
+array([1, 0, 2, 3])
+
+
+**Repeating Sequences**
+a5 = [10,20,30] 
+a5
+[10, 20, 30]
+# Repeat whole array twice
+np.tile(a5, 2)
+array([10, 20, 30, 10, 20, 30])
+# Repeat each element in an array thrice
+np.repeat(a5, 3)
+array([10, 10, 10, 20, 20, 20, 30, 30, 30])
+
+
+
+**Compare Arrays**
+d1 = np.arange(0,10)
+d1
+array([0, 1, 2, 3, 4, 5, 6, 7, 8, 9])
+d2 = np.arange(0,10)
+d2
+array([0, 1, 2, 3, 4, 5, 6, 7, 8, 9])
+d3 = np.arange(10,20)
+d3
+array([10, 11, 12, 13, 14, 15, 16, 17, 18, 19])
+d4 = d1[::-1]
+d4
+array([9, 8, 7, 6, 5, 4, 3, 2, 1, 0])
+# Compare arrays using "allclose" function. If this function returns True then Arrays are equal
+res1 = np.allclose(d1,d2)
+res1
+True
+# Compare arrays using "allclose" function. If this function returns False then Arrays are not equal
+res2 = np.allclose(d1,d3)
+res2
+False
+# Compare arrays using "allclose" function.
+res3 = np.allclose(d1,d4)
+res3
+False
+
+
